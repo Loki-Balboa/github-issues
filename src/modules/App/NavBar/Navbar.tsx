@@ -20,7 +20,6 @@ const Navbar: FunctionComponent<Props> = ({ setSearchPhrase }) => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log(inputValue);
       setSearchPhrase(inputValue);
     }, REQUEST_DELAY);
 

@@ -3,6 +3,7 @@ import React, { ReactElement, useState } from "react";
 import useUsers from "./hooks/useUsers";
 import useRepositories from "./hooks/useRepositories";
 import Navbar from "./NavBar";
+import { ResultsCount, ResultsWrapper } from "./App.components";
 
 interface ResultElement {
   id: number;
@@ -47,8 +48,12 @@ const App = () => {
   return (
     <>
       <Navbar setSearchPhrase={setSearchPhrase} />
-      {totalCount}
-      {allData}
+      <ResultsWrapper>
+        <ResultsCount>
+          {totalCount.toLocaleString("en-US")} results
+        </ResultsCount>
+        {allData}
+      </ResultsWrapper>
     </>
   );
 };
