@@ -46,7 +46,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
+      <Navbar setSearchPhrase={setSearchPhrase} />
       {totalCount}
       {allData}
     </>

@@ -3,21 +3,32 @@ import React, {
   FormEvent,
   FunctionComponent,
   SetStateAction,
+  useEffect,
+  useState,
 } from "react";
 
 import { GithubLogo, NavbarWrapper, SearchInput } from "./Navbar.components";
 
 interface Props {
-  searchPhrase: string;
   setSearchPhrase: Dispatch<SetStateAction<string>>;
 }
 
-const Navbar: FunctionComponent<Props> = ({
-  searchPhrase,
-  setSearchPhrase,
-}) => {
+const REQUEST_DELAY = 500;
+
+const Navbar: FunctionComponent<Props> = ({ setSearchPhrase }) => {
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log(inputValue);
+      setSearchPhrase(inputValue);
+    }, REQUEST_DELAY);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue, setSearchPhrase]);
+
   const handleChange = (e: FormEvent<HTMLInputElement>) =>
-    setSearchPhrase(e.currentTarget.value);
+    setInputValue(e.currentTarget.value);
 
   return (
     <NavbarWrapper>
@@ -25,7 +36,7 @@ const Navbar: FunctionComponent<Props> = ({
       <SearchInput
         type="text"
         placeholder="Search"
-        value={searchPhrase}
+        value={inputValue}
         onChange={handleChange}
       />
     </NavbarWrapper>
