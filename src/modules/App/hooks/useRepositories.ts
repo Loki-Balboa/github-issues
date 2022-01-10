@@ -14,7 +14,7 @@ export interface RepositoryData {
     name: string;
   };
   stargazers_count: number;
-  open_issues_count: string;
+  open_issues_count: number;
   created_at: string;
   updated_at: string;
 }

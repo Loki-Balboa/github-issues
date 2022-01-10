@@ -6,7 +6,9 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { GlobalStyle } from "../../../config/style/GlobalStyle";
 import { theme } from "../../../config/style/theme";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
+});
 
 const Providers: FunctionComponent = ({ children }) => (
   <QueryClientProvider client={queryClient}>

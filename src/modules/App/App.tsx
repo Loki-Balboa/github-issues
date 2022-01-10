@@ -4,6 +4,7 @@ import useUsers from "./hooks/useUsers";
 import useRepositories from "./hooks/useRepositories";
 import Navbar from "./NavBar";
 import { ResultsCount, ResultsWrapper } from "./App.components";
+import RepoRow from "./RepoRow";
 
 interface ResultElement {
   id: number;
@@ -31,16 +32,13 @@ const App = () => {
   const repos: ResultElement[] =
     reposQuery.data?.items.map((repo) => ({
       id: repo.id,
-      component: (
-        <div key={`repo_${repo.id}`}>
-          {repo.id}, {repo.name}
-        </div>
-      ),
+      component: <RepoRow key={`repo_${repo.id}`} repoData={repo} />,
       elementType: "repo",
     })) ?? [];
 
   const totalCount =
     (usersQuery.data?.total_count ?? 0) + (reposQuery.data?.total_count ?? 0);
+
   const allData = [...users, ...repos]
     .sort((a, b) => a.id - b.id)
     .map((i) => i.component);
