@@ -1,4 +1,5 @@
 import { ReactElement, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import useUsers from "./hooks/useUsers";
 import useRepositories from "./hooks/useRepositories";
@@ -6,6 +7,7 @@ import Navbar from "./NavBar";
 import { ResultsCount, ResultsWrapper } from "./App.components";
 import RepoRow from "./RepoRow";
 import UserRow from "./UserRow/UserRow";
+import UserDetails from "../UserDetails";
 
 interface ResultElement {
   id: number;
@@ -43,12 +45,22 @@ const App = () => {
   return (
     <>
       <Navbar setSearchPhrase={setSearchPhrase} />
-      <ResultsWrapper>
-        <ResultsCount>
-          {totalCount.toLocaleString("en-US")} results
-        </ResultsCount>
-        {allData}
-      </ResultsWrapper>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ResultsWrapper>
+                <ResultsCount>
+                  {totalCount.toLocaleString("en-US")} results
+                </ResultsCount>
+                {allData}
+              </ResultsWrapper>
+            }
+          />
+          <Route path=":userLogin" element={<UserDetails />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };

@@ -8,9 +8,9 @@ import {
   RepoDetails,
   RepoIcon,
 } from "./RepoRow.components";
-import { ReactComponent as Star } from "../shared/icons/star.svg";
 import { getDaysFromNow } from "../../../helpers/date";
 import { languageColors } from "../../../helpers/languageColors";
+import { ReactComponent as Star } from "../shared/icons/star.svg";
 
 interface Props {
   repoData: RepositoryData;
