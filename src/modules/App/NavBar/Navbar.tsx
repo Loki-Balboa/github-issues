@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { Link } from "react-router-dom";
 
 import { GithubLogo, NavbarWrapper, SearchInput } from "./Navbar.components";
 
@@ -31,7 +32,9 @@ const Navbar: FunctionComponent<Props> = ({ setSearchPhrase }) => {
 
   return (
     <NavbarWrapper>
-      <GithubLogo />
+      <Link to="/">
+        <GithubLogo />
+      </Link>
       <SearchInput
         type="text"
         placeholder="Search"

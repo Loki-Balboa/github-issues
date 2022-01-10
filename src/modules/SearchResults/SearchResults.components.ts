@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { media } from "../../helpers/media";
 
 export const ResultsWrapper = styled.main`

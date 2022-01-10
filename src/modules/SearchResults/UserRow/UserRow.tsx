@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
-import { UserData } from "../hooks/useUsers";
-import { RowHeader, RowWrapper } from "../shared/components";
+import { UserData } from "../../SearchResults/hooks/useUsers";
+import { RowHeader, RowWrapper } from "../../SearchResults/shared/components";
 import { UserImg, UserLink } from "./UserRow.components";
 
 interface Props {

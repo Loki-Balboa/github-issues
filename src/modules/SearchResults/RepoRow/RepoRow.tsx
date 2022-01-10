@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
-import { RepositoryData } from "../hooks/useRepositories";
-import { RowHeader, RowWrapper } from "../shared/components";
+import { RepositoryData } from "../../SearchResults/hooks/useRepositories";
+import { RowHeader, RowWrapper } from "../../SearchResults/shared/components";
 import {
   LanguageDot,
   RepoDescription,
