@@ -9,3 +9,9 @@ export const RowWrapper = styled.div`
   margin-bottom: 20px;
   border-top: 1px solid ${({ theme }) => theme.colors.lightGray2};
 `;
+
+export const RowHeader = styled.h2`
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: ${({ theme }) => theme.colors.linkBlue};
+`;

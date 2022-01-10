@@ -1,13 +1,12 @@
 import { FunctionComponent } from "react";
 
 import { RepositoryData } from "../hooks/useRepositories";
-import { RowWrapper } from "../shared/components";
+import { RowHeader, RowWrapper } from "../shared/components";
 import {
   LanguageDot,
   RepoDescription,
   RepoDetails,
   RepoIcon,
-  RepoName,
 } from "./RepoRow.components";
 import { ReactComponent as Star } from "../shared/icons/star.svg";
 import { getDaysFromNow } from "../../../helpers/date";
@@ -37,7 +36,7 @@ const RepoRow: FunctionComponent<Props> = ({ repoData }) => {
   return (
     <RowWrapper>
       <RepoIcon />
-      <RepoName>{repoData.full_name}</RepoName>
+      <RowHeader>{repoData.full_name}</RowHeader>
       <RepoDescription>{repoData.description}</RepoDescription>
       <RepoDetails>
         {!!repoData.stargazers_count && (

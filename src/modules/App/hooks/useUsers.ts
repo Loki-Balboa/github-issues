@@ -7,6 +7,7 @@ import { GithubSearchResponse } from "./types";
 export interface UserData {
   id: number;
   login: string;
+  avatar_url: string;
 }
 
 const usersUrl = `${GITHUB_API_URL}/search/users`;

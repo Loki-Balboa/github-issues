@@ -5,6 +5,7 @@ import useRepositories from "./hooks/useRepositories";
 import Navbar from "./NavBar";
 import { ResultsCount, ResultsWrapper } from "./App.components";
 import RepoRow from "./RepoRow";
+import UserRow from "./UserRow/UserRow";
 
 interface ResultElement {
   id: number;
@@ -21,11 +22,7 @@ const App = () => {
   const users: ResultElement[] =
     usersQuery.data?.items.map((user) => ({
       id: user.id,
-      component: (
-        <div key={`user_${user.id}`}>
-          {user.id}, {user.login}
-        </div>
-      ),
+      component: <UserRow key={`user_${user.id}`} userData={user} />,
       elementType: "user",
     })) ?? [];
 

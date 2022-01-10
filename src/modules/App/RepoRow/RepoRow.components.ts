@@ -2,12 +2,6 @@ import styled from "styled-components";
 
 import { ReactComponent as Repo } from "./icons/repo.svg";
 
-export const RepoName = styled.h2`
-  font-size: 16px;
-  margin-bottom: 5px;
-  color: ${({ theme }) => theme.colors.linkBlue};
-`;
-
 export const RepoIcon = styled(Repo)`
   position: absolute;
   top: 20px;
