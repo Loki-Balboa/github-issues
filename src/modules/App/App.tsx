@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 import useUsers from "./hooks/useUsers";
 import useRepositories from "./hooks/useRepositories";

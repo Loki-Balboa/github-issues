@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 
 import { RepositoryData } from "../hooks/useRepositories";
 import { RowWrapper } from "../shared/components";
