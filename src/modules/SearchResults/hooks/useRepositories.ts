@@ -19,20 +19,29 @@ export interface RepositoryData {
   updated_at: string;
 }
 
+const POPULAR_REPO_STARS_COUNT = 500;
 const searchReposUrl = `${GITHUB_API_URL}/search/repositories`;
 
-export const getRepos = async (searchPhrase: string) => {
-  const { data } = await axios.get(`${searchReposUrl}?q=${searchPhrase}`);
+export const getRepos = async (query: string) => {
+  const { data } = await axios.get(`${searchReposUrl}?q=${query}`);
   return data;
 };
 
-const useRepositories = (searchPhrase: string) =>
-  useQuery<GithubSearchResponse<RepositoryData>>(
+const useRepositories = (searchPhrase: string) => {
+  const today = new Date();
+  today.setDate(today.getDate() - 7);
+
+  const query =
+    searchPhrase !== ""
+      ? searchPhrase
+      : `stars:>=${POPULAR_REPO_STARS_COUNT}+pushed:${today
+          .toISOString()
+          .replace(/T.*/, "")}`;
+
+  return useQuery<GithubSearchResponse<RepositoryData>>(
     ["repos", searchPhrase],
-    async () => getRepos(searchPhrase),
-    {
-      enabled: searchPhrase !== "",
-    }
+    async () => getRepos(query)
   );
+};
 
 export default useRepositories;

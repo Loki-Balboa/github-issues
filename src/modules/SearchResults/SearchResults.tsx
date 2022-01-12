@@ -17,25 +17,27 @@ interface Props {
 }
 
 const SearchResults: FunctionComponent<Props> = ({ searchPhrase }) => {
-  const usersQuery = useUsers(searchPhrase);
-  const reposQuery = useRepositories(searchPhrase);
+  const { data: usersData } = useUsers(searchPhrase);
+  const { data: reposData } = useRepositories(searchPhrase);
 
   const users: ResultElement[] =
-    usersQuery.data?.items.map((user) => ({
+    usersData?.items.map((user) => ({
       id: user.id,
       component: <UserRow key={`user_${user.id}`} userData={user} />,
       elementType: "user",
     })) ?? [];
 
   const repos: ResultElement[] =
-    reposQuery.data?.items.map((repo) => ({
+    reposData?.items.map((repo) => ({
       id: repo.id,
       component: <RepoRow key={`repo_${repo.id}`} repoData={repo} />,
       elementType: "repo",
     })) ?? [];
 
   const totalCount =
-    (usersQuery.data?.total_count ?? 0) + (reposQuery.data?.total_count ?? 0);
+    (usersData?.total_count ?? 0) + (reposData?.total_count ?? 0);
+
+  const showTotalCount = searchPhrase !== "";
 
   const allData = [...users, ...repos]
     .sort((a, b) => a.id - b.id)
@@ -43,7 +45,11 @@ const SearchResults: FunctionComponent<Props> = ({ searchPhrase }) => {
 
   return (
     <ResultsWrapper>
-      <ResultsCount>{totalCount.toLocaleString("en-US")} results</ResultsCount>
+      {showTotalCount && (
+        <ResultsCount>
+          {totalCount.toLocaleString("en-US")} results
+        </ResultsCount>
+      )}
       {allData}
     </ResultsWrapper>
   );
