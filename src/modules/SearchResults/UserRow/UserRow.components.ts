@@ -13,3 +13,20 @@ export const UserImg = styled.img`
   width: 20px;
   border-radius: 50%;
 `;
+
+export const UserBio = styled.p`
+  color: ${({ theme }) => theme.colors.darkGray3};
+  font-size: 14px;
+  margin-top: 20px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
+export const UserLocation = styled.p`
+  color: ${({ theme }) => theme.colors.darkGray2};
+  font-size: 12px;
+  margin-top: 8px;
+`;

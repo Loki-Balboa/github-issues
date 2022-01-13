@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { RowDescription } from "../../shared/components";
 
 import { ReactComponent as Repo } from "./icons/repo.svg";
 
@@ -8,8 +9,7 @@ export const RepoIcon = styled(Repo)`
   left: 0;
 `;
 
-export const RepoDescription = styled.p`
-  color: ${({ theme }) => theme.colors.darkGray2};
+export const RepoDescription = styled(RowDescription)`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

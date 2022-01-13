@@ -15,3 +15,7 @@ export const RowHeader = styled.h2`
   margin-bottom: 5px;
   color: ${({ theme }) => theme.colors.linkBlue};
 `;
+
+export const RowDescription = styled.p`
+  color: ${({ theme }) => theme.colors.darkGray2};
+`;

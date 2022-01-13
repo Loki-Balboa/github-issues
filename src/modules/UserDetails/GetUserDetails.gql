@@ -1,0 +1,16 @@
+query GetUserDetails($userLogin: String!) {
+  user(login: $userLogin) {
+    login
+    name
+    avatarUrl
+    followers {
+      totalCount
+    }
+    following {
+      totalCount
+    }
+    starredRepositories {
+      totalCount
+    }
+  }
+}

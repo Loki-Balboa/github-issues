@@ -1,23 +1,43 @@
 import { FunctionComponent } from "react";
 import { ThemeProvider } from "styled-components";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 import { GlobalStyle } from "../../../config/style/GlobalStyle";
 import { theme } from "../../../config/style/theme";
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { refetchOnWindowFocus: false } },
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_GITHUB_API_URL,
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
 const Providers: FunctionComponent = ({ children }) => (
-  <QueryClientProvider client={queryClient}>
+  <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       {children}
     </ThemeProvider>
-    <ReactQueryDevtools />
-  </QueryClientProvider>
+  </ApolloProvider>
 );
 
 export default Providers;

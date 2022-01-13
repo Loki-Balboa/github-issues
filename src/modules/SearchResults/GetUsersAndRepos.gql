@@ -1,0 +1,44 @@
+query GetUsersAndRepos($usersQuery: String!, $reposQuery: String!) {
+  users: search(query: $usersQuery, type: USER, first: 30) {
+    userCount
+    edges {
+      node {
+        __typename
+        ... on User {
+          databaseId
+          login
+          name
+          avatarUrl
+          bio
+          location
+        }
+      }
+    }
+  }
+
+  repos: search(query: $reposQuery, type: REPOSITORY, first: 30) {
+    repositoryCount
+    edges {
+      node {
+        __typename
+        ... on Repository {
+          databaseId
+          name
+          description
+          stargazerCount
+          primaryLanguage {
+            name
+            color
+          }
+          issues {
+            totalCount
+          }
+          licenseInfo {
+            name
+          }
+          updatedAt
+        }
+      }
+    }
+  }
+}
