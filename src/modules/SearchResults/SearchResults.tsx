@@ -5,6 +5,7 @@ import { ResultsCount, ResultsWrapper } from "./SearchResults.components";
 import UserRow from "./UserRow";
 import { useGetUsersAndReposQuery } from "../../generated/graphql";
 import { RepoData, UserData } from "./types";
+import Loader from "../shared/Loader";
 
 interface ResultElement {
   id: number;
@@ -27,7 +28,7 @@ const SearchResults: FunctionComponent<Props> = ({ searchPhrase }) => {
       ? searchPhrase
       : `stars:>=500 pushed:${today.toISOString().replace(/T.*/, "")}`;
 
-  const { data } = useGetUsersAndReposQuery({
+  const { data, loading } = useGetUsersAndReposQuery({
     variables: { usersQuery, reposQuery },
   });
 
@@ -62,7 +63,7 @@ const SearchResults: FunctionComponent<Props> = ({ searchPhrase }) => {
   const totalCount =
     (data?.repos?.repositoryCount ?? 0) + (data?.users?.userCount ?? 0);
 
-  const showTotalCount = searchPhrase !== "";
+  const showTotalCount = searchPhrase !== "" && !loading;
 
   const allData = [...users, ...repos]
     .sort((a, b) => a.id - b.id)
@@ -70,6 +71,7 @@ const SearchResults: FunctionComponent<Props> = ({ searchPhrase }) => {
 
   return (
     <ResultsWrapper>
+      {loading && <Loader />}
       {showTotalCount && (
         <ResultsCount>
           {totalCount.toLocaleString("en-US")} results
